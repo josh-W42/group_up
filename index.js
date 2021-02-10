@@ -19,11 +19,16 @@ app.get('/', (req, res) => {
     res.redirect('/rooms');
 });
 
+// error route
+app.get('/error', (req, res) => {
+    res.render('./main/error');
+});
+
 app.use('/rooms', controllers.rooms);
 app.use('/categories', controllers.categories);
 
 app.get('*', (req, res) => {
-    res.render('/main/error');
+    res.status(404).render('./main/error');
 });
 
 // Listen

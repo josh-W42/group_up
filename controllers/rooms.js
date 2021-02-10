@@ -26,6 +26,25 @@ router.get('/new', (req, res) => {
     db.category.findAll().then(results => {
         const categories = results;
         res.render('./rooms/new', { categories });
+    }).catch(error => {
+        console.log('###### \nError\n');
+        console.log(error);
+        console.log('###### \nEnd\n')
+        res.status(400).redirect('/error');
+    });
+});
+
+router.get('/:id', (req, res) => {
+    db.room.findOne({
+        where: {id: req.params.id},
+        include: [db.comment]
+    }).then(room => {
+        res.render('./rooms/show', { room });
+    }).catch(error => {
+        console.log('###### \nError\n');
+        console.log(error);
+        console.log('###### \nEnd\n')
+        res.status(404).redirect('/error');
     });
 });
 
