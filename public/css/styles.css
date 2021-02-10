@@ -3,4 +3,5 @@
     height: 400px;
     max-height: 400px;
     overflow-y: scroll;
+    scroll-behavior: smooth;
 }
