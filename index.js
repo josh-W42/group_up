@@ -22,6 +22,10 @@ app.get('/', (req, res) => {
 app.use('/rooms', controllers.rooms);
 app.use('/categories', controllers.categories);
 
+app.get('*', (req, res) => {
+    res.render('/main/error');
+});
+
 // Listen
 let PORT = process.env.PORT || 8000;
 let server = app.listen(PORT, () => {

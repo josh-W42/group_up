@@ -1,0 +1,27 @@
+<h1>Rooms</h1>
+
+<% if (rooms.length < 1) { %>
+    <h2>There are no rooms! Create one <a href='/rooms/new'>here</a></h2>
+<% } %>
+
+<% rooms.forEach(room => { %>
+    <div class="card mb-3 col-12">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img width="400px" src="<%= room.imageUrl %> " alt="Picture choosen for <%= room.name %> room">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title"><%= room.name %> </h5>
+              <div class="row">
+                <h6 class="col-2">Categories: </h6>
+                <a class="btn btn-light col-2" href="/categories/<%= room.categories[0].id %>"><%= room.categories[0].name %></a> 
+              </div>
+              <p class="card-text"><%= room.description %> </p>
+              <p class="card-text"><small class="text-muted">Created on <%= room.createdAt %> </small></p>
+              <a class="btn btn-success" href="/rooms/<%= room.id %>">Join</a>
+            </div>
+          </div>
+        </div>
+      </div>
+<% }) %>
