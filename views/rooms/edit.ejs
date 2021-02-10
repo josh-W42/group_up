@@ -1,0 +1,29 @@
+<div class="col-3 m-auto">
+    <form method="POST" action="/rooms/edit/<%= room.id %>/?_method=PUT" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label class="form-label" for="name">Name</label>
+            <input class="form-control" type="text" value="<%= room.name %> " name="name" id="name" required>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" for="category">Category</label>
+            <select class="form-select" aria-label="Default select example" name="category" id="category">
+                <% categories.forEach(category => { %>
+                    <option value="<%= category.id %> " ><%= category.name %> </option>
+                <% }) %>
+            </select>
+        </div>
+    
+        <div class="mb-3">
+            <label class="form-label" for="descritpion">Descritpion</label>
+            <textarea class="form-control" name="description" id="descritpion" cols="30" rows="10"><%= room.description %> </textarea>
+        </div>
+    
+        <div class="mb-3">
+            <label class="form-label" for="image">Room Photo:</label>
+            <input class="form-control" type="file" name="image" id="image">
+        </div>
+
+        <input class="btn btn-primary" type="submit" value="Edit Room">
+    </form> 
+</div>

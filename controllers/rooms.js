@@ -34,6 +34,7 @@ router.get('/new', (req, res) => {
     });
 });
 
+// GET /rooms/id - show one route
 router.get('/:id', (req, res) => {
     db.room.findOne({
         where: {id: req.params.id},
@@ -45,6 +46,17 @@ router.get('/:id', (req, res) => {
         console.log(error);
         console.log('###### \nEnd\n')
         res.status(404).redirect('/error');
+    });
+});
+
+// GET /rooms/edit/id - edit a room
+router.get('/edit/:id', (req, res) => {
+    db.room.findOne({
+        where: {id: req.params.id}
+    }).then(room => {
+        db.category.findAll().then(categories => {
+            res.render('./rooms/edit', {room, categories});
+        });
     });
 });
 
@@ -70,6 +82,43 @@ router.post('/', uploads.single('image'), (req, res) => {
 
 });
 
+// PUT route for editing a room
+router.put('/edit/:id', uploads.single('image'), (req, res) => {
+    let image = req.file.path;
+
+    cloudinary.uploader.upload(image, (result) => {
+        db.room.findOne({
+            where: {id: req.params.id}
+        }).then(room => {
+            room.name = req.body.name;
+            room.description = req.body.description;
+            room.imageUrl = result.secure_url;
+            room.addCategory(req.body.category);
+            room.save();
+            res.redirect('/rooms');
+        }).catch(error => {
+            console.log('###### \nError\n');
+            console.log(error);
+            console.log('###### \nEnd\n')
+            res.status(400).redirect('/error');
+        });
+    });
+});
+
+// DELETE route for just deleting a whole room
+router.delete('/:id', (req, res) => {
+    db.room.findOne({
+        where: {id: req.params.id}
+    }).then(room => {
+        room.destroy();
+        res.redirect('/rooms');
+    }).catch(error => {
+        console.log('###### \nError\n');
+        console.log(error);
+        console.log('###### \nEnd\n')
+        res.status(400).redirect('/error');
+    });
+});
 
 
 module.exports = router;

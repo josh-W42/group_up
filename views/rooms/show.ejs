@@ -1,5 +1,15 @@
 <div class="col-5 m-auto">
     <h1><%= room.name %></h1>
+    <div class="row">
+      <div class="col-3">
+        <a href="/rooms/edit/<%= room.id %>" class="btn btn-warning">Edit Room</a>
+      </div>
+      <div class="col-3">
+        <form method="POST" action="/rooms/<%= room.id %>/?_method=DELETE">
+          <input class="btn btn-danger" type="submit" value="Delete Room">
+        </form>
+      </div>
+    </div>
     <div id="commentContainer" class="column">
         <% room.comments.forEach(comment => { %>
             <div class="card mb-3" style="max-width: 540px;">
