@@ -77,7 +77,7 @@ router.post('/', uploads.single('image'), async(req, res) => {
             imageUrl: result.secure_url
         });
         await room.addCategory(req.body.category);
-        res.redirect('/rooms');        
+        res.redirect('/rooms');     
     } catch (error) {
         console.log('###### \nError\n');
         console.log(error);
