@@ -12,24 +12,28 @@
     </div>
     <div id="commentContainer" class="column">
         <% room.comments.forEach(comment => { %>
-            <div class="card mb-3" style="max-width: 540px;">
-                <div class="row g-0">
-                  <div class="col-md-8">
-                    <div class="card-body">
-                      <h5 class="card-title"><%= comment.poster %> </h5>
-                      <p class="card-text"><%= comment.content %> </p>
-                      <p class="card-text"><small class="text-muted">posted: <%= comment.createdAt %> </small></p>
-                    </div>
-                  </div>
+            <div class="card">
+              <div class="col">
+                <div class="card-body">
+                  <h5 class="card-title"><%= comment.poster %> </h5>
+                  <p class="card-text"><%= comment.content %> </p>
+                  <p class="card-text"><small class="text-muted">posted: <%= comment.createdAt %> </small></p>
                 </div>
               </div>
+            </div>
         <% }) %>
     </div>
-    <form method="POST" action="/comments">
-        <div class="mb-3 row">
-            <label for="comment">New Comment</label>
-            <textarea name="comment" id="comment" cols="20" rows="2"></textarea>
+    <form method="POST" action="/comments/<%= room.id %> ">
+      <div class="mb-3 row">
+        <label for="poster">Post As:</label>
+        <div>
+          <input type="text" name="poster" id="poster">
         </div>
+        <label for="content">New Comment</label>
+        <div>
+          <textarea name="content" id="comment" cols="20" rows="2"></textarea>
+        </div>
+      </div>
         <input class="btn btn-primary" type="submit" value="Post">
     </form>
 </div>
