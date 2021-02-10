@@ -16,7 +16,7 @@ app.use(express.static(__dirname + '/public/'));
 
 // Home route
 app.get('/', (req, res) => {
-    res.send('Basic route setup');
+    res.redirect('/rooms');
 });
 
 app.use('/rooms', controllers.rooms);
