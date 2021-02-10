@@ -1,0 +1,17 @@
+{
+  "development": {
+    "database": "group_up_dev",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "test": {
+    "database": "group_up_test",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "production": {
+    "database": "group_up_prod",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  }
+}
